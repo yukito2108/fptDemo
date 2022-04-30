@@ -2,45 +2,47 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 	<title>Save Order</title>
 </head>
 
 <body>
-	<div class="container">
-		<h3>Order Directory</h3>
-		<hr>
-		
-		<p class="h4 mb-4">Save Order</p>
-		
-		<form action="#" th:action="@{/orders/save}"
-			  th:object="${order}"  method="POST">
-			<select id="customer" th:field="*{customerId}">
-				<option th:each="customer : ${customerList}" th:value="${customer.id}"
-						th:text="${customer.name}"></option>
-			</select>
-			<select id="product" th:field="*{productId}">
-				<option th:each="product : ${productList}" th:value="${product.id}"
-						th:text="${product.name}"></option>
-			</select>
-			<input type="number" th:field="*{amount}" id="amount"
-					class="form-control mb-4 col-4" placeholder="Amount">
-			<input type="date" th:field="*{orderDate}" id="orderDate"
-					class="form-control mb-4 col-4" placeholder="OrderDate">
-			<button type="submit" class="btn btn-info col-2">Save</button>
-		</form>
-		<hr>
-		<a th:href="@{/orders/list}">Back to list</a>
-	
-	</div>
+<div class="container">
+	<h3>Order Directory</h3>
+	<hr>
 
+	<p class="h4 mb-4">Save Order</p>
 
+	<form action="#" th:action="@{/orders/save}"
+		  th:object="${order}"  method="POST">
+		<select id="customer" th:field="*{customerId}">
+			<option th:each="customer : ${customerList}" th:value="${customer.id}"
+					th:text="${customer.name}"></option>
+		</select>
+		<select id="product" th:field="*{productId}">
+			<option th:each="product : ${productList}" th:value="${product.id}"
+					th:text="${product.name}"></option>
+		</select>
+		<input type="number" min="0" th:field="*{amount}" id="amount"
+			   class="form-control mb-4 col-4" placeholder="Amount"/>
+		<input type="date" th:field="*{orderDate}" id="orderDate"
+			   class="form-control mb-4 col-4" placeholder="OrderDate"/>
+		<button type="submit" class="btn btn-info col-2">Save</button>
+	</form>
+	<hr>
+	<a th:href="@{/orders/list}">Back to list</a>
+
+</div>
+
+<script>
+	orderDate.min = new Date().toISOString().split("T")[0];
+</script>
 </body>
 
 </html>

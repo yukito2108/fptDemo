@@ -2,45 +2,62 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 	<title>Save Customer</title>
+	<script>
+		function validateForm() {
+			let x = document.forms["myForm"]["fname"].value;
+			if (x == "") {
+				alert("Name must be filled out");
+				return false;
+			}
+		}
+	</script>
 </head>
 
 <body>
-	<div class="container">
-		<h3>Customer Directory</h3>
-		<hr>
-		
-		<p class="h4 mb-4">Save Customer</p>
-		
-		<form action="#" th:action="@{/customers/save}"
-						 th:object="${customer}" method="POST">
-			
-			<!-- Add hidden form field to handle the update -->
-			<input type="hidden" th:field="*{id}" />
-						 
-			<input type="text" th:field="*{name}"
-					class="form-control mb-4 col-4" placeholder="Name">
-			<input type="text" th:field="*{phone}"
-					class="form-control mb-4 col-4" placeholder="Phone">
-			<input type="text" th:field="*{email}"
-					class="form-control mb-4 col-4" placeholder="Email">
-			<input type="text" th:field="*{address}"
-				   class="form-control mb-4 col-4" placeholder="Address">
-			<button type="submit" class="btn btn-info col-2">Save</button>	
-		</form>
-		<hr>
-		<a th:href="@{/customers/list}">Back to list</a>
-	
-	</div>
+<div class="container">
+	<h3>Customer Directory</h3>
+	<hr>
 
+	<p class="h4 mb-4">Save Customer</p>
 
+	<form name="myForm" action="#" th:action="@{/customers/save}"
+		  th:object="${customer}" method="POST">
+
+		<!-- Add hidden form field to handle the update -->
+		<input type="hidden" th:field="*{id}" />
+
+		<input name="fname" type="text" th:field="*{name}"
+			   class="form-control mb-4 col-4" placeholder="Name2" required/>
+		<input type="text" th:field="*{phone}"
+			   class="form-control mb-4 col-4" placeholder="Phone2" pattern="[0-9]{10}" required/>
+		<input type="text" th:field="*{email}"
+			   class="form-control mb-4 col-4" placeholder="Email2">
+		<input type="text" th:field="*{address}"
+			   class="form-control mb-4 col-4" placeholder="Address2">
+		<button type="submit" class="btn btn-info col-2">Save</button>
+	</form>
+	<hr>
+	<a th:href="@{/customers/list}">Back to list</a>
+
+</div>
+
+<script>
+	function validateForm() {
+		let x = document.forms["myForm"]["fname"].value;
+		if (x == "") {
+			alert("Name must be filled out");
+			return false;
+		}
+	}
+</script>
 </body>
 
 </html>
